@@ -15,6 +15,12 @@
 
 . $(dirname ${BASH_SOURCE})/../util.sh
 
+REPO=${REPO:-brendanburns}
+IMAGE=${IMAGE:-go-server}
+VERSION=first
+
+DOCKER_IMAGE=${REPO}/${IMAGE}:${VERSION}
+
 export PATH=$PATH:$HOME/go/bin
 
 if which ccat > /dev/null; then
@@ -30,12 +36,6 @@ run "clear"
 kubectl create namespace ${namespace} > /dev/null 2>&1 || true
 
 run "${CAT} server.go"
-
-REPO=${REPO:-brendanburns}
-IMAGE=${IMAGE:-go-server}
-VERSION=first
-
-DOCKER_IMAGE=${REPO}/${IMAGE}:${VERSION}
 
 export CGO_ENABLED=0
 export GOOS=linux
